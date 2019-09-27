@@ -3,6 +3,19 @@
 /////////////////
 float gameX;
 float gameY;
+
+/*
+Below I'm initializing the "game's" physical dimension
+variables. This is essential to use as a global variable
+due to the dimensions being used in all of the draw
+functions. 
+
+The variables are first set in drawbody, after the canvas
+dimensions are set by the set up function. The game size 
+is based on the dimensions of the canvas, which make it
+somewhat responsive. That said, it's best to keep the same
+aspect ratio. 
+*/
 float gameWidth;
 float gameHeight;
 float gameTopLineY;
