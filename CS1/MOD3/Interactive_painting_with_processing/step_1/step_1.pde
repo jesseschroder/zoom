@@ -27,7 +27,7 @@ void keyPressed() {
         case 'b':
             currentColor = blueColor;
         break;
-            case 'g':
+        case 'g':
             currentColor = greenColor;
         break;
         case 'r':

@@ -13,6 +13,8 @@ void setup() {
     size(800, 600);
     rectMode(CENTER);
     mouseClicked();
+    surface.setResizable(true);
+    print("i've been setup");
 }
 
 // randomization of the variables
@@ -34,7 +36,7 @@ void draw() {
 void mouseClicked() {
     background(background);    
 
-    for (int i = 0; i < 3; i = i+1) {
+    for (int i = 0; i < 3; i++) {
         randomVariables();
         drawMonster(monX, monY, monWidth, monHeight, monColor);
     }
