@@ -10,7 +10,7 @@ float artWallHeight;
 void setup() {
        size(1200, 900);
        background(125);
-       // surface.setResizable(true); // sign text and bear head & arms do not rezise properly
+       surface.setResizable(true); // sign text and bear head & arms do not rezise properly
 }
 
 /////////////////

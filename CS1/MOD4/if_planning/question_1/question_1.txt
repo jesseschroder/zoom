@@ -1,0 +1,17 @@
+Variables
+
+• Canvas size
+• Ellipse size
+• Ball xSpeed
+• Ball ySpeed
+• Negative speed change
+• Positive speed change
+
+To start I would have the ellipse(ball) start in the top left (0, 0). The travelling of the ball would require multiple conditional statements.
+If the ball is at the top, but X is less than width, then xSpeed should be positive. Once X is equal to width, the xSpeed should swith to 0
+and ySpeed switch to positive. This process of changing the variables through the draw process will cause the ball to scroll across the 
+top of the canvas, and then switch to travelling down the right hand side once it reaches the edge. 
+
+The same can be done for the bottom right -> bottom left motion. Is the Y of the ball equal to height && X equal to width?
+Then Y speed changes to 0 and X changes to a negative value. Once at the bottom left side, a similar if statement to check if the height
+is equal to Y, AND the width is equal to 0. Then change speed on Y to negative and X to 0.

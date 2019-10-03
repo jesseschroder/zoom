@@ -222,7 +222,7 @@ void drawSpeaker() {
      stroke(150);
      strokeWeight(8);
      for (int i = 0; i < 6; i++ ) {
-     line(speakerSpace*(i+1), 0, speakerSpace*(i+1), speakerHeight);
+          line(speakerSpace*(i+1), 0, speakerSpace*(i+1), speakerHeight);
      }
      popMatrix();
 }

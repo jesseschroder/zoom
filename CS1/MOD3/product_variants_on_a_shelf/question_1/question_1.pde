@@ -84,6 +84,7 @@ void drawLowerProducts() {
     // numbering products
     fill(0);
     textSize(18);
+    textAlign(CENTER,CENTER);
     for (int numberLabel = 1; numberLabel <= 5; numberLabel++ ) {
         text(numberLabel, firstProductX, productY);
         firstProductX = firstProductX + productWidth + productSpace;
@@ -119,7 +120,7 @@ void selectionHighlight(float x) {
     rectMode(CENTER);
     stroke(255);
     strokeWeight(2);
-    fill(100, 50);
+    fill(100, 75);
 
     rect(x, productY, productWidth, productHeight);
 }
