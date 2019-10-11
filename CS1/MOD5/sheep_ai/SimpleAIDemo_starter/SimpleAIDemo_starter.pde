@@ -20,11 +20,13 @@ PImage sheepTeaImage;
 int sheepX;
 int sheepY;
 float sheepDirection; // in radians
+int sheepState;
 
 final int sheepSpeed = 3;
-
 final int sheepMouseThreshold = 50;
-
+final int sheepStateWander = 1;
+final int sheepStateStop = 2;
+final int sheepStateColors = 3;
 
 // Stuff that gets done just once at the beginning
 // of the program. Set up values that either need
@@ -41,6 +43,7 @@ void setup()
   sheepX = width/2;
   sheepY = height/2;
   sheepDirection = 187;
+  sheepState = sheepStateWander;
 }
 
 
@@ -61,50 +64,69 @@ void draw()
 // state.  Since I am not passing in any parameters,
 // this isn't the most portable function - but it does
 // help organize the code.
-void updateSheepState()
-{
-  // TODO
+void updateSheepState() {
+  if (sheepState == sheepStateWander) {
+    if (dist(mouseX, mouseY, sheepX, sheepY) >= sheepMouseThreshold) {
+      sheepState = sheepStateWander;
+    } else {
+      sheepState = sheepStateStop;
+    }
+  } else if (sheepState == sheepStateStop) {
+    if (dist(mouseX, mouseY, sheepX, sheepY) >= sheepMouseThreshold) {
+      sheepState = sheepStateWander;
+    } else if (mousePressed) {
+      sheepState = sheepStateColors;
+    }
+  } else if (sheepState == sheepStateColors) {
+    if (!mousePressed) {
+      sheepState = sheepStateStop;
+    }
+  }
 }
 
 
 // This function draws the sheep based on its current
 // state.
-void drawSheep()
-{
-  image(sheepImage, sheepX, sheepY);
+void drawSheep() {
+  if (sheepState == sheepStateWander) {
+    image(sheepImage, sheepX, sheepY);
+  } else {
+    image(sheepTeaImage, sheepX, sheepY);
+  }
 }
 
 
 // This function checks the sheep's current state and
 // moves its location if appropriate.
-void moveSheep()
-{
-  int nextX = sheepX + int(sheepSpeed * cos(sheepDirection));
-  int nextY = sheepY + int(sheepSpeed * sin(sheepDirection));
+void moveSheep() {
+  if (sheepState == sheepStateWander) {
+    int nextX = sheepX + int(sheepSpeed * cos(sheepDirection));
+    int nextY = sheepY + int(sheepSpeed * sin(sheepDirection));
 
-  int crossProduct = (nextX - sheepX)*(mouseY - sheepY) -
-                     (nextY - sheepY)*(mouseX - sheepX);
- 
-  if (dist(nextX, nextY, mouseX, mouseY) > 25)
-  {
-    sheepX = nextX;
-    sheepY = nextY;
-  }
-
-  if (random(1) < 0.05)
-  {
-    final int angleToTurn = 30;
-    if (crossProduct < 0)
+    int crossProduct = (nextX - sheepX)*(mouseY - sheepY) -
+                      (nextY - sheepY)*(mouseX - sheepX);
+  
+    if (dist(nextX, nextY, mouseX, mouseY) > 25)
     {
-      sheepDirection -= radians(angleToTurn 
-                        + random(angleToTurn/4) 
-                        - angleToTurn/8);
+      sheepX = nextX;
+      sheepY = nextY;
     }
-    else
+
+    if (random(1) < 0.05)
     {
-      sheepDirection += radians(angleToTurn 
-                        + random(angleToTurn/4.0f) 
-                        - angleToTurn/8.0f);
+      final int angleToTurn = 30;
+      if (crossProduct < 0)
+      {
+        sheepDirection -= radians(angleToTurn 
+                          + random(angleToTurn/4) 
+                          - angleToTurn/8);
+      }
+      else
+      {
+        sheepDirection += radians(angleToTurn 
+                          + random(angleToTurn/4.0f) 
+                          - angleToTurn/8.0f);
+      }
     }
   }
 }
