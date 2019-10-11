@@ -43,12 +43,12 @@ void findVariables() {
 
 void draw() {
     findVariables();
-    drawCircle();
+    drawCircle(circleX, circleY, circleSize, drawColour);
 }
 
-void drawCircle() {
+void drawCircle(int x, int y, int size, color colour) {
     noStroke();
-    fill(drawColour);
+    fill(colour);
 
-    circle(circleX, circleY, circleSize);
+    circle(x, y, size);
 }

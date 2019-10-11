@@ -67,25 +67,13 @@ void drawBox(int x, char boxLetter, color boxColor) {
 void keyPressed() {
     switch (key) {
         case 'a' :
-            if (box1CurrentColor == box1Color) {
-                box1CurrentColor = box1SelectedColor;
-            } else {
-                box1CurrentColor = box1Color;
-            }
+            box1CurrentColor = (box1CurrentColor == box1Color) ? box1SelectedColor : box1Color;
         break;
         case 'b' :
-            if (box2CurrentColor == box2Color) {
-                box2CurrentColor = box2SelectedColor;
-            } else {
-                box2CurrentColor = box2Color;
-            }
+            box2CurrentColor = (box2CurrentColor == box2Color) ? box2SelectedColor : box2Color;
         break;
         case 'c' :
-            if (box3CurrentColor == box3Color) {
-                box3CurrentColor = box3SelectedColor;
-            } else {
-                box3CurrentColor = box3Color;
-            }
+            box3CurrentColor = (box3CurrentColor == box3Color) ? box3SelectedColor : box3Color;
         break;
     }
 }
