@@ -28,6 +28,22 @@ final int sheepStateWander = 1;
 final int sheepStateStop = 2;
 final int sheepStateColors = 3;
 
+final int circleShift = 40;
+
+final color[] listOfColors =
+{
+  color(227, 41, 41), // red
+  color(214, 122, 224), // purple
+  color(115, 111, 234), // blue
+  color(83, 216, 97), // green
+  color(252, 255, 95), // yellow
+  color(211, 133, 15), // brown
+  color(175, 202, 216), // blue 
+};
+
+final int numFramesToShiftColor = 10;
+int colorStartIndex;
+
 // Stuff that gets done just once at the beginning
 // of the program. Set up values that either need
 // initial settings or that you know won't ever
@@ -44,6 +60,7 @@ void setup()
   sheepY = height/2;
   sheepDirection = 187;
   sheepState = sheepStateWander;
+  colorStartIndex = 0;
 }
 
 
@@ -59,6 +76,28 @@ void draw()
   moveSheep();
 }
 
+void drawRings(int x, int y, int radiusChange, color[] colors, int startIndex)
+{
+  float maxDistance = max(dist(x, y, 0, 0), dist(x, y, 0, height));
+  maxDistance = max(maxDistance, dist(x, y, width, 0));
+  maxDistance = max(maxDistance, dist(x, y, width, height));
+
+ 
+  float radius = maxDistance;
+  int colorIndex = startIndex;
+  while (radius > 0)
+  {
+    fill(colors[colorIndex]);
+    colorIndex = (colorIndex + 1);
+    if (colorIndex >= colors.length) // past the end? start again!
+    {
+      colorIndex = 0;
+    }
+  
+    ellipse(x, y, 2*radius, 2*radius);
+    radius -= radiusChange;
+  }
+}
 
 // This function checks whether the sheep should be changing
 // state.  Since I am not passing in any parameters,
@@ -80,7 +119,14 @@ void updateSheepState() {
   } else if (sheepState == sheepStateColors) {
     if (!mousePressed) {
       sheepState = sheepStateStop;
+      } else if (frameCount % numFramesToShiftColor == 0)
+  {
+    colorStartIndex = colorStartIndex + 1;
+    if (colorStartIndex >= listOfColors.length)
+    {
+      colorStartIndex = 0;
     }
+  }
   }
 }
 
@@ -91,6 +137,9 @@ void drawSheep() {
   if (sheepState == sheepStateWander) {
     image(sheepImage, sheepX, sheepY);
   } else {
+    if (sheepState == sheepStateColors) {
+      drawRings(sheepX, sheepY, circleShift, listOfColors, colorStartIndex);
+    }
     image(sheepTeaImage, sheepX, sheepY);
   }
 }

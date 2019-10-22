@@ -59,6 +59,7 @@ void setup()
   walkerX = width/2;
   walkerY = height/2;
   walkerCurrentSpeed = walkerFullSpeed;
+  walkerState = walkerStateClean;
   
   // Walker images
   walkerCleanImage = loadImage("clean.png");
@@ -120,14 +121,17 @@ void drawWalker(int x, int y) {
 // drawing walker states
 void drawCleanWalker(int x, int y) {
   image(walkerCleanImage, x, y);
+  walkerCurrentSpeed = walkerFullSpeed;
 }
 
 void drawDirtyWalker(int x, int y) {
   image(walkerDirtyImage, x, y);
+  walkerCurrentSpeed = walkerFullSpeed/2;
 }
 
 void drawHalfDirtyWalker(int x, int y) {
   image(walkerHalfImage, x, y);
+  walkerCurrentSpeed = walkerFullSpeed*3/4;
 }
 
 /////////////////////////
@@ -143,14 +147,10 @@ void mousePressed() {
 }
 
 boolean clickedOnWalker() {
-  if (mouseX <= walkerX + walkerWidth/2 &&
+  return (mouseX <= walkerX + walkerWidth/2 &&
       mouseX >= walkerX - walkerWidth/2 &&
       mouseY <= walkerY + walkerHeight/2 &&
-      mouseY >= walkerY - walkerHeight/2) {
-        return true;
-      } else {
-        return false;
-      }
+      mouseY >= walkerY - walkerHeight/2);
 }
 
 /////////////////////////
@@ -166,25 +166,17 @@ void checkState() {
 }
 
 boolean inMud() {
-  if (leftSide(mudPuddleX) && topSide(mudPuddleY) && bottomSide(mudPuddleY) ||
+  return (leftSide(mudPuddleX) && topSide(mudPuddleY) && bottomSide(mudPuddleY) ||
       rightSide(mudPuddleX) && topSide(mudPuddleY) && bottomSide(mudPuddleY) ||
       topSide(mudPuddleY) && leftSide(mudPuddleX) && rightSide(mudPuddleX) ||
-      bottomSide(mudPuddleY) && leftSide(mudPuddleX) && rightSide(mudPuddleX)) {
-        return true;
-      } else {
-        return false;
-      }
+      bottomSide(mudPuddleY) && leftSide(mudPuddleX) && rightSide(mudPuddleX));
 }
 
 boolean inPuddle() {
-  if (rightSide(cleanPuddleX) && topSide(cleanPuddleY) && bottomSide(cleanPuddleY) ||
+  return (rightSide(cleanPuddleX) && topSide(cleanPuddleY) && bottomSide(cleanPuddleY) ||
       leftSide(cleanPuddleX) && topSide(cleanPuddleY) && bottomSide(cleanPuddleY) ||
       topSide(cleanPuddleY) && leftSide(cleanPuddleX) && rightSide(cleanPuddleX) ||
-      bottomSide(cleanPuddleY) && leftSide(cleanPuddleX) && rightSide(cleanPuddleX)) {
-        return true;
-      } else {
-        return false;
-      }
+      bottomSide(cleanPuddleY) && leftSide(cleanPuddleX) && rightSide(cleanPuddleX));
 }
 
 /////////////////////////
@@ -192,37 +184,21 @@ boolean inPuddle() {
 /////////////////////////
 
 boolean leftSide(int pudX) {
-  if ((walkerX - walkerWidth/2) < (pudX + puddleWidth/2) &&
-      (walkerX - walkerWidth/2) > (pudX - puddleWidth/2)) {
-        return true;
-      } else {
-        return false;
-      }
+  return ((walkerX - walkerWidth/2) < (pudX + puddleWidth/2) &&
+      (walkerX - walkerWidth/2) > (pudX - puddleWidth/2));
 }
 
 boolean rightSide(int pudX) {
-  if ((walkerX + walkerWidth/2) > (pudX - puddleWidth/2) &&
-      (walkerX + walkerWidth/2) < (pudX + puddleWidth/2)) {
-        return true;
-      } else {
-        return false;
-      }
+  return ((walkerX + walkerWidth/2) > (pudX - puddleWidth/2) &&
+      (walkerX + walkerWidth/2) < (pudX + puddleWidth/2));
 }
 boolean topSide(int pudY) {
-  if ((walkerY - walkerHeight/2) < (pudY + puddleHeight/2) &&
-      (walkerY - walkerHeight/2) > (pudY - puddleHeight/2)) {
-        return true;
-      } else {
-        return false;
-      }
+  return ((walkerY - walkerHeight/2) < (pudY + puddleHeight/2) &&
+      (walkerY - walkerHeight/2) > (pudY - puddleHeight/2));
 }
 boolean bottomSide(int pudY) {
-  if ((walkerY + walkerHeight/2) > (pudY - puddleWidth/2) &&
-      (walkerY + walkerHeight/2) < (pudY + puddleWidth/2)) {
-        return true;
-      } else {
-        return false;
-      }
+  return ((walkerY + walkerHeight/2) > (pudY - puddleWidth/2) &&
+      (walkerY + walkerHeight/2) < (pudY + puddleWidth/2));
 }
 
 /////////////////////////
