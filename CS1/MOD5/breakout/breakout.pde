@@ -329,7 +329,7 @@ class Game {
     void draw() {
         drawPoints();
         drawLives();
-        if (brickSet.bricksDestroyed == 80) isWon = true;
+        // if (brickSet.bricksDestroyed == 80) isWon = true;
         if (recentY) recentY = bounceYCounter();
         if (recentX) recentX = bounceXCounter();
         if (isPaused) pauseScreen();
