@@ -9,7 +9,7 @@ Draw a field of grass where each blade has a random shade of green and a random 
 
 final color backgroundColour = color(252, 241, 205);
 
-int grassQuantity = 10000;
+int grassQuantity = 4000;
 
 Grass[] bladesOfGrass = new Grass[grassQuantity];
 

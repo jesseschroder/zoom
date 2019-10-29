@@ -13,7 +13,7 @@ Add a mouseClicked() function that restarts the growing process with each blade 
 
 final color backgroundColour = color(252, 241, 205);
 
-int grassQuantity = 10000;
+int grassQuantity = 4000;
 
 Grass[] bladesOfGrass = new Grass[grassQuantity];
 

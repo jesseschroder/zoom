@@ -12,7 +12,7 @@ grass should not "grow" to the mowed lawn height. Only grass that is tall enough
 
 final color backgroundColour = color(252, 241, 205);
 
-int grassQuantity = 10000;
+int grassQuantity = 4000;
 
 Grass[] bladesOfGrass = new Grass[grassQuantity];
 Mower mower = new Mower();
