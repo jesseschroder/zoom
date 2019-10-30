@@ -10,7 +10,7 @@ Using your Grass class and drawGrass() function, write a program that uses an ar
 final color backgroundColour = color(252, 241, 205);
 final color grassColour = color(50, 180, 50);
 
-int grassQuantity = 10000;
+int grassQuantity = 4000;
 
 Grass[] bladesOfGrass = new Grass[grassQuantity];
 

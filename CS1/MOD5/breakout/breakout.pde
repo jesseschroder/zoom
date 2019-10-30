@@ -267,20 +267,20 @@ class Paddle {
 
 void keyPressed() {
     if (game.isPaused == false && game.gameOver == false && game.isWon == false) {
-        switch (keyCode) {
-            case RIGHT :
+        switch (key) {
+            case 'f' :
                 paddle.moveRight = true;
             break;
-            case LEFT :
+            case 'e' :
                 paddle.moveLeft = true;
             break;
-            case UP :
+            case 'h' :
                 game.isWon = true;
             break;
         }
     } else {
         switch (key) {
-            case ' ' :
+            case 'g' :
                 if (game.isPaused) {
                 game.isPaused = false;
                 } else if (game.gameOver || game.isWon) {
@@ -294,11 +294,11 @@ void keyPressed() {
 
 void keyReleased() {
     if (game.isPaused == false) {
-        switch(keyCode) {
-            case RIGHT :
+        switch(key) {
+            case 'f' :
                 paddle.moveRight = false;
             break;
-            case LEFT :
+            case 'e' :
                 paddle.moveLeft = false;
             break;
         }
