@@ -37,7 +37,7 @@ class Survivor {
             peopleStats.put("Not Infected", peopleStats.get("Not Infected")+1);
         }
 
-        female = halfBoolean();
+        female = fiftyPercentChance();
         x = int(random(1150));
         y = int(random(750));
         direction = int(random(1, 187));
@@ -57,17 +57,16 @@ class Survivor {
         }
     }
 
-    boolean halfBoolean() {
+    boolean fiftyPercentChance() {
         return (random(1) > 0.5);
     }
 
-
-    Survivor findClosestTarget(boolean lookForInfected) {
+    Survivor findClosestTarget(boolean infectedBoolean) {
         float minDistance = dist(0, 0, width, height);
         Survivor closest = this;
         for (int i = 0; i < people.size(); i ++ ){
             Survivor target = people.get(i);
-            if (target.infected == lookForInfected || this == target || target.isDead) continue;
+            if (target.infected == infectedBoolean || this == target || target.isDead) continue;
             if (minDistance > min(minDistance, dist(x, y, target.x, target.y))) {
                 minDistance = min(minDistance, dist(x, y, target.x, target.y));
                 closest = target;
@@ -222,7 +221,7 @@ void loadImages() {
     infectedI = loadImage("infected.png");
     infectedI.resize(35, 43);
     bG = loadImage("background.jpg");
-    bG.resize(1000,1000);
+    bG.resize(width,height);
 }
 
 void loadNames() {
@@ -314,13 +313,6 @@ void drawMessages() {
     fill(225);
     textSize(16);
     textAlign(CENTER, CENTER);
-
-    // int messagePosition = 0;
-    // for (int i = messageList.size(); i > 0; i--) {
-    //     text(messageList.get(i - 1).content, width - 150, (height - 200)-(messagePosition*20));
-    //     if (messageList.get(i - 1).createdAt + 5000 < millis()) messageList.get(i - 1).delete();
-    //     messagePosition++;
-    // }
 
     int messagePosition = 0;
     int messageCount = messageList.size();

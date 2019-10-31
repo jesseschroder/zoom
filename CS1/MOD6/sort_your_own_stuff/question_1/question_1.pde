@@ -30,6 +30,7 @@ import java.util.*;
 final int productWidth = 80;
 final int productBuffer = 100;
 final int productCount = 10;
+final String instructions = "p - Sort by Price / s - Sort by Size / r - Reset (unsort)";
 
 ArrayList<Product> productSet = new ArrayList<Product>();
 
@@ -62,7 +63,6 @@ void setup() {
     strokeWeight(3);
     textSize(24);
     textAlign(CENTER, CENTER);
-    println(productSet.size());
 }
 
 void generateProducts() {
@@ -74,24 +74,28 @@ void generateProducts() {
 void draw() {
     background(225);
     drawProducts();
+    drawInstructions();
+}
+
+void drawInstructions() {
+    text(instructions, width/2, 50);
 }
 
 void drawProducts() {
-
-
     for (int i = 0; i < productCount; i++) {
         Product product = productSet.get(i);
         fill(product.colour);
-        rect(product.x, product.y - product.h, product.w, product.y);
+        int xPos = (productBuffer - productWidth) + productBuffer*i;
+        rect(xPos, product.y - product.h, xPos+productWidth, product.y);
 
         fill(0);
-        text("$"+product.price, product.x + productWidth/2, product.y + 30);
+        text("$"+product.price, xPos + productWidth/2, product.y + 30);
     }
 }
 
-void sortByPrice(ArrayList products) {
-    int i, j, min, x;
-    // Product x, y;
+void sortByPrice() {
+    int i, j, min;
+     Product x;
     for (i = 0; i < productSet.size(); i++) {
         min=i;
         for(j = 1+i; j < productSet.size(); j++) {
@@ -100,45 +104,56 @@ void sortByPrice(ArrayList products) {
             }
         }
 
-        // x = productSet.get(i).price;
-        // productSet.get(i).price = productSet.get(min).price;
-        // productSet.get(min).price = x;
-        println(i + " " + j);
         x = productSet.get(i);
-        y = productSet.get(min);
-        productSet.set(i, y);
+        productSet.set(i, productSet.get(min));
         productSet.set(min, x);
     }
 }
 
-void sortBySize(ArrayList products) {
+void sortBySize() {
+    int i, j, min;
+     Product x;
+    for (i = 0; i < productSet.size(); i++) {
+        min=i;
+        for(j = 1+i; j < productSet.size(); j++) {
+            if (productSet.get(j).h < productSet.get(min).h) {
+                min = j;
+            }
+        }
 
+        x = productSet.get(i);
+        productSet.set(i, productSet.get(min));
+        productSet.set(min, x);
+    }
+}
+
+void sortByX() {
+    int i, j, min;
+     Product x;
+    for (i = 0; i < productSet.size(); i++) {
+        min=i;
+        for(j = 1+i; j < productSet.size(); j++) {
+            if (productSet.get(j).x < productSet.get(min).x) {
+                min = j;
+            }
+        }
+
+        x = productSet.get(i);
+        productSet.set(i, productSet.get(min));
+        productSet.set(min, x);
+    }
 }
 
 void keyPressed() {
     switch(key) {
         case 'p' :
-            // println(productSet);
-            sortByPrice(productSet);
-            // println(productSet);
+            sortByPrice();
+        break;
+        case 's' :
+            sortBySize();
+        break;
+        case 'r' :
+            sortByX();
         break;
     }
 }
-
-/*
-
-
-   public void orderAsc(int vector[]) {
-      int i, j, min, x;
-      for (i = 0; i < vector.length-1; i++) {
-         min=i;
-         for (j = i+1; j < vector.length; j++)
-            if (vector[j] < vector[min])
-               min = j;
-
-         x = vector[i];
-         vector[i] = vector[min];
-         vector[min] = x;
-      }
-   }
-*/
