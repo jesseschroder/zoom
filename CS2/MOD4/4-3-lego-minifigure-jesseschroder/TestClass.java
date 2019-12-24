@@ -19,7 +19,6 @@ public class TestClass {
     LegoItem toothPick = new LegoItem("Tooth Pick", 1);
     LegoItem giantRock = new LegoItem("Giant Rock", 20);
     LegoItem sled = new LegoItem("Sled", 5);
-
     /*
     Tests
      */
